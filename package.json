@@ -1,11 +1,19 @@
 {
   "name": "vysor",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "bin": {
+    "vysor": "dist/bin.js"
+  },
   "scripts": {
+    "build": "tsc --esModuleInterop --allowJs --outDir dist src/*",
+    "start": "node dist/bin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.3.4",
+    "ts-node": "^10.0.0"
+  }
 }
