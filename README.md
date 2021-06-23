@@ -1,5 +1,21 @@
 # Vysor CLI
 
+## Installation
+
+```sh
+npm -g install vysor
+vysor -h
+```
+
+or 
+
+```sh
+npx vysor -h
+```
+
+
+## Usage
+
 ```
 usage: vysor [options]
 
