@@ -57,8 +57,10 @@ async function findVysorBinary(): Promise<VysorBinary> {
         throw new Error('unknown platform');
     }
 
-    if (!fs.existsSync(vb)) {
-        throw new Error(`Vysor binary was not found at ${vb}. Please install it from https://vysor.io/download`);
+    if (true || !fs.existsSync(vb)) {
+        console.error(`Vysor binary was not found at ${vb}.`);
+        console.error(`Please install it from https://vysor.io/download`);
+        process.exit(1);
     }
 
     return new VysorBinary(vb);
