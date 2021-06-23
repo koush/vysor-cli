@@ -89,7 +89,7 @@ The following advanced options are available:
 
 -i [id]     Some devices have multiple displays. The default behavior is
             to view the default display. This option overrides
-            which display will viewed. More information below:
+            which display will be viewed. More information below:
             DisplayManager.getDisplays: https://bit.ly/3d07Ztl
             Display.getDisplayId: https://bit.ly/3j8cN3A
 
