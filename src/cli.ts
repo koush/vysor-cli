@@ -45,7 +45,7 @@ class VysorBinary {
 async function findVysorBinary(): Promise<VysorBinary> {
     let vb: string|undefined;
     if (process.platform === 'win32') {
-        vb = path.join(getUserHome(), 'Local/Vysor/Vysor.exe');
+        vb = path.join(getUserHome(), 'AppData/Local/Vysor/Vysor.exe');
     }
     else if (process.platform === 'darwin') {
         vb = '/Applications/Vysor.app/Contents/MacOS/Vysor';
