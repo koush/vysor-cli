@@ -99,7 +99,7 @@ If no options are specified, Vysor will be launched as normal.
         }
     }
 
-    vb.launch(...process.argv);
+    vb.launch('--', ...process.argv);
     process.exit();
 }
 
