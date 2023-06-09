@@ -51,9 +51,9 @@ async function findVysorBinary(): Promise<VysorBinary> {
         vb = path.join(getUserHome(), 'Local/Vysor/Vysor.exe');
     }
     else if (process.platform === 'darwin') {
-        vb ='/Applications/Vysor.app/Contents/MacOS/Vysor';
-        // check = '/Applications/Vysor.app/Contents/MacOS/Vysor';
-        // launchArgs.push(check);
+        vb = 'open';
+        check = '/Applications/Vysor.app/Contents/MacOS/Vysor';
+        launchArgs.push('/Applications/Vysor.app', '-n', '--args');
     }
     else if (process.platform === 'linux') {
         vb = (await exec('which vysorapp')).stdout.trim();

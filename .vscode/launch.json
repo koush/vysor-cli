@@ -9,7 +9,8 @@
             "type": "node",
             "request": "launch",
             "args": [
-                "${workspaceFolder}/src/cli.ts"
+                "${workspaceFolder}/src/cli.ts",
+                "-d"
             ],
             "preLaunchTask": "npm: build",
             "runtimeArgs": [
