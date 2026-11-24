@@ -10,6 +10,15 @@ function getUserHome(): string {
     return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']!;
 }
 
+async function which(bin: string): Promise<string | undefined> {
+    try {
+        return (await exec(`which ${bin}`)).stdout.trim() || undefined;
+    }
+    catch (e) {
+        return undefined;
+    }
+}
+
 class VysorBinary {
     constructor(public vb: string, public launchArgs: string[] = []) {
         this.vb = vb;
@@ -26,8 +35,7 @@ class VysorBinary {
             launchCommand = this.vb;
         }
         else if (process.platform === 'linux') {
-            launchCommand = 'gtk-launch';
-            launchArgs.push(this.vb);
+            launchCommand = this.vb;
         }
         else {
             throw new Error('unknown platform');
@@ -56,14 +64,20 @@ async function findVysorBinary(): Promise<VysorBinary> {
         launchArgs.push('/Applications/Vysor.app', '-n', '--args');
     }
     else if (process.platform === 'linux') {
-        vb = (await exec('which vysorapp')).stdout.trim();
+        // v5 installed the binary as vysorapp; v6 packages it as vysor.
+        // the installed version is not known here, so check both.
+        for (const bin of ['vysorapp', 'vysor']) {
+            vb = await which(bin);
+            if (vb)
+                break;
+        }
     }
     else {
         throw new Error('unknown platform');
     }
 
-    if (!fs.existsSync(check || vb)) {
-        console.error(`Vysor binary was not found at ${vb}.`);
+    if (!vb || !fs.existsSync(check || vb)) {
+        console.error(`Vysor binary was not found${vb ? ` at ${vb}` : ''}.`);
         console.error(`Please install it from https://vysor.io/download`);
         process.exit(1);
     }
